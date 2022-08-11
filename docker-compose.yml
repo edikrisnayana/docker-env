@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  mongodb:
+    image: mongo:5.0
+    container_name: local-mongod
+    ports:
+      - 27017:27017
+    volumes:
+      - ./.docker/mongo:/data/db
+    networks:
+      local_net:
+        ipv4_address: 192.168.200.2
+
+  redis:
+    image: bitnami/redis:latest
+    container_name: local-redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 6379:6379
+    volumes:
+      - ./.docker/redis:/data/redis
+    networks:
+      local_net:
+        ipv4_address: 192.168.200.3
+
+networks:
+  local_net:
+    internal: true
+    ipam:
+      config:
+        - subnet: 192.168.200.0/24
