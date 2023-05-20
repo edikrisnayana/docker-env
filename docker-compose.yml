@@ -1,19 +1,21 @@
 version: "3.9"
 services:
   mongodb:
-    image: mongo:5.0
+    image: mongo:latest
     container_name: local-mongod
+    restart: always
     ports:
       - 27017:27017
     volumes:
-      - ./.docker/mongo:/data/db
+      - ./.docker/mongo:/data/mongo
     networks:
       local_net:
         ipv4_address: 192.168.200.2
 
   redis:
-    image: bitnami/redis:latest
+    image: redis:latest
     container_name: local-redis
+    restart: always
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     ports:
@@ -23,6 +25,21 @@ services:
     networks:
       local_net:
         ipv4_address: 192.168.200.3
+
+  postgresql:
+    image: postgres:latest
+    container_name: local-postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./.docker/postgres:/data/postgres
+    networks:
+      local_net:
+        ipv4_address: 192.168.200.4
 
 networks:
   local_net:
