@@ -41,7 +41,27 @@ services:
       local_net:
         ipv4_address: 192.168.200.4
 
+  tensorflow:
+    image: thegeeksdiary/tensorflow-jupyter-gpu:latest
+    container_name: tensorflow-gpu
+    restart: always
+    volumes:
+      - ./.docker/tensorflow/notebooks:/environment/notebooks
+      - ./.docker/tensorflow/data:/environment/data
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            device_ids: ['0']
+            capabilities: [gpu]
+    ports:
+      - '8888:8888'
+    networks:
+      - jupyter
 networks:
+  jupyter:
+    driver: bridge
   local_net:
     internal: true
     ipam:
