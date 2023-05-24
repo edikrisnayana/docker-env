@@ -15,11 +15,11 @@ docker-compose up
 ### Mongo
 - install mongo cli
   ```sh
-  sudo apt install mongodb-clients
+  sudo apt install mongodb-mongosh
   ```
 - connect to mongo using mongo cli
   ```sh
-  mongo --host 192.168.200.2 --port 27017
+  mongosh --host 192.168.200.2 --port 27017
   ```
 
 ### Redis
