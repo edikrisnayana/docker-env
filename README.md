@@ -8,12 +8,12 @@ Local environment using Docker for backend testing locally
 
 ## How to Run
 ```sh
-docker-compose up
+docker compose up
 ```
 
 ## How to Connect with CLI
 ### Mongo
-- install mongo cli
+- install [mongo cli](https://www.mongodb.com/docs/mongodb-shell/install/)
   ```sh
   sudo apt install mongodb-mongosh
   ```
